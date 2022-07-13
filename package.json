@@ -1,0 +1,18 @@
+{
+    "name": "collection-profiling",
+    "version": "1.0.0",
+    "description": "Profiling GAS costs for different collections",
+    "author": "Ben Kurrek",
+    "license": "ISC",
+    "scripts": {
+        "bootstrap": "yarn build && yarn deploy",
+            "build": "cd contract && bash build.sh && cd ..",
+            "deploy": "near dev-deploy out/main.wasm -f",
+        "start": "yarn bootstrap && export $(cat ./neardev/dev-account.env) && node scripts/execute",
+        "foo": "export $(cat ./neardev/dev-account.env) && echo $CONTRACT_NAME"
+    },
+    "dependencies": {
+        "near-api-js": "^0.45.1",
+        "xlsx": "^0.18.5"
+    }
+}
