@@ -8,8 +8,7 @@
         "bootstrap": "yarn build && yarn deploy",
             "build": "cd contract && bash build.sh && cd ..",
             "deploy": "near dev-deploy out/main.wasm -f",
-        "start": "yarn bootstrap && export $(cat ./neardev/dev-account.env) && node scripts/execute",
-        "foo": "export $(cat ./neardev/dev-account.env) && echo $CONTRACT_NAME"
+        "start": "yarn bootstrap && export $(cat ./neardev/dev-account.env) && node scripts/execute"
     },
     "dependencies": {
         "near-api-js": "^0.45.1",

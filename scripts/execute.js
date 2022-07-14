@@ -1,3 +1,4 @@
+const { writeFile } = require("fs");
 const { connect, KeyPair, keyStores, utils } = require("near-api-js");
 const { parseNearAmount, formatNearAmount } = require("near-api-js/lib/utils/format");
 const path = require("path");
@@ -13,7 +14,7 @@ const { startVectorSet } = require("./sets/vector");
 // Reading our test file
 
 let CONTRACT_ID = process.env.CONTRACT_NAME;
-let NUM_ITERS = 10;
+let NUM_ITERS = 100;
 
 let NETWORK_ID = "testnet";
 let near;
@@ -42,6 +43,7 @@ const initiateNear = async () => {
 
 async function start() {
     var filePath = path.join(__dirname, '..', 'sheets', 'data.xlsx');
+    var rawfilePath = path.join(__dirname, '..', 'sheets', 'raw_data.json');
     const file = reader.readFile(filePath);
 
 	//deployed linkdrop proxy contract
@@ -100,6 +102,11 @@ async function start() {
     
     // Writing to our file
     reader.writeFile(file, filePath)
+
+    console.log('dataToWrite: ', JSON.stringify(dataToWrite))
+    await writeFile(rawfilePath, JSON.stringify(dataToWrite), function(err, result) {
+        if(err) console.log('error', err);
+    });
 }
 
 
